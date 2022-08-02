@@ -28,5 +28,10 @@ namespace Project278.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet("store")]
+        public IActionResult Store() {
+            return View();
+        }
     }
 }

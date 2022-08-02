@@ -1,8 +1,73 @@
 ﻿@{
+    Layout = null;
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/home.css" />
+    <link rel="stylesheet" href="~/Project278.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/highlight-border.css" />
+    <script src="~/js/highlight-effect.js"></script>
+    <script src="https://kit.fontawesome.com/7d7b6613e1.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-light">
+    <div>
+        <div class="row vh-100 m-0">
+            <div class="col-sm-12 col-md-6 col-lg-6 bg-light vh-100">
+                <div class="d-flex flex-column justify-content-center align-items-start gap-4 vh-100">
+                    <div class="container-fluid">
+                        <h1 class="text-dark"><span class="text-danger">CDs</span><br/>Collection</h1>
+                        <p>Get a wide range of physical media records for endless entertainment</p>
+                    </div>
+                    <div class="container-fluid">
+                        <a class="btn btn-danger text-light" asp-action="Store" asp-controller="Home">Visit Store</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 vh-100 bg-light m-0 p-0">
+                <div class="shape vh-100 w-100">
+                    <div class="cd-img"></div>
+                    <div class="cassette-img"></div>
+                </div>
+            </div>
+        </div>
+        <header class="d-flex justify-content-around align-items-center fixed-top position-absolute navbar-expand-lg navbar navbar-transparent">
+            <a class="logo navbar-brand flex-1 mr-auto" asp-action="Store" asp-controller="Home"></a>
+            <button class="navbar-toggler navbar-expand-md" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="fas fa-bars" style="color:#212529; font-size:28px;"></i>
+                    </span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <nav class="flex-1">
+                    <ul class="navbar-nav list-inline list-unstyled gap-4" style="flex-direction: row;">
+                        <li class="nav-item highlight"><a src="#" class="nav-link text-dark">Music</a></li>
+                        <li class="nav-item highlight"><a src="#" class="nav-link text-dark">Games</a></li>
+                        <li class="nav-item highlight"><a src="#" class="nav-link text-toggle-black-light">Anime</a></li>
+                    </ul>   
+                </nav>
+                <div class="input-group rounded flex-1 search-div" style="max-width: 300px;">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+            </div>
+        </header>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container pt-3">
+            &copy; @DateTime.Now.Year - Project278 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body> 
+</html>
