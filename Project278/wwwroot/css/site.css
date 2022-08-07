@@ -1,18 +1,31 @@
-html {
-  font-size: 14px;
+span {
+    border-radius: 4px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.text-requirement {
+    font-size: 0.75rem;
+    color: #afafaf;
+    margin: 0;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.container {
+    max-width: 1100px;
 }
 
-body {
-  margin-bottom: 60px;
+.img-hover-text {
+    top: 4px;
+    right: 4px;
+} 
+
+.footer {
+    position: static!important;
+}
+
+.fa-cart-plus {
+    font-size: 1.25rem;
+    color: rgb(var(--bs-dark-rgb));
+}
+
+.btn-outline-secondary:hover .fa-cart-plus {
+    color: rgb(var(--bs-light-rgb));
 }

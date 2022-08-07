@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Project278.Data;
 using Project278.Models;
 using System.Diagnostics;
 
@@ -8,13 +9,17 @@ namespace Project278.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly AppDbContext _db;
+
+        public HomeController(ILogger<HomeController> logger, AppDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
         {
+            IEnumerable<Label> labels = _db.Labels;
             return View();
         }
 

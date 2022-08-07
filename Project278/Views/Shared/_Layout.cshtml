@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> signInManager
+
+@{
+    var userId = signInManager.UserManager.GetUserId(@User) as string;
+    var avatarUrl = signInManager.UserManager.Users.FirstOrDefault(user => user.Id == userId)?.AvatarUrl as string;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,26 +15,65 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Project278.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css">
+    
 </head>
 <body>
     <header style="margin: 0;">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index"></a>
+                <div class="order-sm-1">
+                    <ul class="navbar-nav align-items-center" style="flex-direction:row;">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <form method="post" asp-action="Logout" asp-controller="Account">
+                                <input type="submit" value="Log Out" class="btn btn-outline-secondary text-dark m-2">
+                            </form>
+                            <a
+                               asp-route-id="@userId"
+                               asp-controller="Profile"
+                               asp-action="Index">
+                               @if (string.IsNullOrEmpty(@avatarUrl)) {
+                                    <img class="rounded-circle" width="40px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="Profile avatar">
+                                }
+                                else {
+                                    <img class="rounded-circle" width="40px" src="@avatarUrl" alt="Profile avatar">
+                                }
+                            </a>
+                        } 
+                        else
+                        {
+                            // get current action
+                            var action = ViewContext.RouteData.Values["action"]?.ToString();
+                            // anonymous user - Register link and Log In button
+                            <li class="nav-item p-2">
+                                <a asp-action="Login" asp-controller="Account"
+                                   class="btn btn-outline-secondary">Log In</a>
+                            </li>
+                            <li class="nav-item p-2">
+                                <a asp-action="Register" asp-controller="Account"
+                                   class="btn btn-outline-secondary">Register</a>
+                            </li>
+                        }
+                    </ul>
+                    
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Label" asp-action="Index">Store</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
+                
             </div>
         </nav>
     </header>
@@ -45,6 +91,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/7d7b6613e1.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

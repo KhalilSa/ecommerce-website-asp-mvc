@@ -1,0 +1,28 @@
+﻿@model Project278.Models.Label;
+
+@{
+    ViewBag.Title = "| Details";
+}
+
+<div class="row d-flex justify-content-center align-items-stretch mt-4" id="movie-details">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center flex-column gap-2" style="max-width: fit-content;">
+            <div class="position-relative h-100" style="float: left;">
+                <img src="@Model.Thumbnail" alt="@Model.Title movie cover" class="img-fluid h-100">
+                <span class="img-hover-text bg-danger text-light position-absolute p-1 text-uppercase">@Model.ReleaseYear</span>
+            </div>
+            <div class="btn btn-outline-secondary">
+                <i class="fas fa-cart-plus"></i>
+                <span>$@Math.Round(Model.Price, 2)</span>
+            </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 d-flex flex-column gap-2 align-items-start">
+            <h3 class="mt-2">@Model.Title</h3>
+            <div class="d-flex text-light my-2 gap-1 flex-wrap">
+                @foreach (string format in @Model.Format.Split(","))
+                {
+                    <span class="bg-dark p-1">@format</span>
+                }
+            </div>
+            <p class="lead">@Model.ArtistName</p>
+        </div>
+</div>
